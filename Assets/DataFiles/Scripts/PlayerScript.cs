@@ -16,11 +16,15 @@ public class PlayerScript : MonoBehaviour
 
   public Text ctext;
 
+  public AudioClip CollectClip;
+
+  public AudioSource CollectMusicSource;
+
     // Start is called before the first frame update
     void Start()
     {
       Counter();
-      level++;
+      CollectMusicSource.clip = CollectClip;
     }
 
     // Update is called once per frame
@@ -44,6 +48,7 @@ public class PlayerScript : MonoBehaviour
       if (other.gameObject.CompareTag("Present")) {
         Destroy(other.gameObject);
         count--;
+        CollectMusicSource.Play();
         Counter();
       }
 
@@ -58,9 +63,9 @@ public class PlayerScript : MonoBehaviour
 
     public void Counter() {
       if (count > 0) {
-        ctext.text = "Presents left: " + count.ToString();
+        ctext.text = "Presents left : " + count.ToString();
       } else {
-        ctext.text = "Go to a christmas tree!";
+        ctext.text = "Go to a Christmas Tree";
       }
     }
 }
