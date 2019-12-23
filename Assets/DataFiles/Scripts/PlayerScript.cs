@@ -12,12 +12,15 @@ public class PlayerScript : MonoBehaviour
 
   public int count;
 
+  public int level = 0;
+
   public Text ctext;
 
     // Start is called before the first frame update
     void Start()
     {
       Counter();
+      level++;
     }
 
     // Update is called once per frame
@@ -32,7 +35,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         if (transform.position.y < -15) {
-          SceneManager.LoadScene("GameScene");
+           SceneManager.LoadScene(Application.loadedLevel);
         }
 
     }
@@ -45,7 +48,11 @@ public class PlayerScript : MonoBehaviour
       }
 
       if (count == 0 && other.gameObject.CompareTag("Tree")) {
-        SceneManager.LoadScene("EndScene");
+        if (level == 1) {
+          SceneManager.LoadScene("Level1CompleteScene");
+        } else {
+          SceneManager.LoadScene("EndScene");
+        }
       }
     }
 
