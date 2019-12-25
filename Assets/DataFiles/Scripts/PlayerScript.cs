@@ -14,11 +14,17 @@ public class PlayerScript : MonoBehaviour
 
   public int level = 0;
 
+  private bool falling = false;
+
   public Text ctext;
 
   public AudioClip CollectClip;
 
   public AudioSource CollectMusicSource;
+
+  public AudioClip FallingClip;
+
+  public AudioSource FallingMusicSource;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +46,14 @@ public class PlayerScript : MonoBehaviour
 
         if (transform.position.y < -15) {
            SceneManager.LoadScene(Application.loadedLevel);
+           FallingMusicSource.Stop();
+        }
+
+        if (!falling) {
+          if (transform.position.y < -3) {
+            falling = true;
+            FallingMusicSource.Play();
+          }
         }
 
     }
